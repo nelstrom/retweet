@@ -44,7 +44,7 @@ class Status
     count = 0
     begin
       SiteConfig.search_keywords.each do |keyword|
-        Twitter::Search.new(keyword).each do |s|
+        Twitter::Search.new(keyword).per_page(100).each do |s|
           unless self.first(:twitter_id => s.id)
             self.create_from_twitter(s)
             count += 1
